@@ -1,0 +1,75 @@
+##William Zhang 110768508 HW3 
+logret<- read.table("d_logret_6stocks.txt",header=T)
+t.test(logret$Intel,mu = 0 )
+##From the test it seems the P value is greater than 0.05 because 0.4829 > 0.05 
+##Thus we dont reject the null hypothesis and will accept it.
+#Therefore the mean returns is zero
+
+
+wilcox.test(logret$Intel,mu = 0,paired = F)
+###The P value is 0.8279 thus we dont reject  the null hypothesis because 0.8279 > 0.05
+###The result is no different than the T-Test where he conclude the mean return is zero
+
+t.test(logret$Intel,logret$Pfizer)
+###The P value for this test 0.8287.We cannot reject the null hypothesis
+### Thus the reutrn  difference does equal to zero.(Thus no change) 
+###Thus there is no difference between the 2 data
+
+wilcox.test(logret$Intel, logret$Pfizer,paired  = F)
+###The p value of this test 0.892. We cannot reject null hypothesis. 
+#Again location shift is equal to 0
+###Thus there is no difference between the 2 data
+
+var.test(logret$Intel,logret$Pfizer)
+##We test the variance of the returns and the P value is extremely small.
+##Thus we can reject the null hypothesis. The variances of each return are not equal 
+
+##Problem 2
+##Put the rats into seperate containers
+degree1 = c(152,157,179,185,178,149)
+degree2 = c(384,369,354,367,375,423)
+##These rats while the same are put in 2 different enviroment 
+##but thefore not a paired data set. So we take their data as indepdent 
+shapiro.test(degree1)
+#P value confirms they are normal
+shapiro.test(degree2)
+##We can conclude both data is normal 
+var.test(degree1,degree2)
+###We can conclude the variances are equal
+t.test(degree2,degree1, alternative = "greater",var.equal =  T)
+
+### The P value is way too small.We will reject null hypothesis 
+##We will claim that that the mean blood pressure of the rats exposed to 5 degree celsius is greater than  the ones exposed at  26
+
+
+
+
+##Problem 3 
+###Put the data into containers 
+eyeaffected  <- c (488,478,480,426,440,410,458,460)
+eyenotaffected <- c(484,478,492,444,436,398,464,476)
+###The data is not broken into 2 populations we can automatically assume they paired data.
+###Now we must test their differnece 
+diff = eyeaffected - eyenotaffected
+shapiro.test(diff)
+###The P value 0.3018 is greater than  0.10 thus we must accept that the difference are normal 
+t.test(eyeaffected,eyenotaffected,paired = T,conf.level =   0.9)
+### Due to this T test, the P value is greater than 0.1.Thus we cannot reject null hypothesis.
+###The difference in means is equal to zero.Thus we can conclude the eye affected
+### eye not affected and eye affected  mean data is equal(thus no differnece)
+
+t.test(diff,mu = 0, conf.level =  0.9) 
+###The P value is way larger than 0.1 thus we can reject null hypothesis 
+###Conclude there is no difference in data 
+
+###Problem 4
+data  <- c(28, 25, 27, 31, 10, 26, 30, 15, 55, 12, 24, 32, 28, 42, 38)
+###The data is single line
+shapiro.test(data)
+
+##The data has a P value of 0.4038,Thus the data is normal. We will use a T Test.
+
+t.test(data,mu = 25)
+
+##The P value is 0.297 thus we cannot reject the null hypothesis. Thus the mean of the data
+###The mean equals to 25. Thus there is no change in the mean time.

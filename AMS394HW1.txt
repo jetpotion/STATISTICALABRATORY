@@ -1,0 +1,59 @@
+## William Zhang HW # 1  110768508
+##Problem 1:
+height <- c(1.55, 1.92, 1.60, 1.75, 1.58, 1.67, 1.63, 1.82, 1.76, 1.77, 1.72, 1.85)
+meanheight<-mean(height)
+standardeviation  <-sd(height)
+
+lengthofheight <-length(height)
+cat("The length of the height vector is \n",lengthofheight)
+
+vectorlessthan <- height[height < 1.65]
+cat("The number of elements less than  1.65 is \n" , length(vectorlessthan))
+
+vectorconditional <- height [height > 1.60 & height < 1.75]
+
+
+##Problem 2:
+tmp <- matrix(rnorm(12),3,4)
+totalsumrows  <- sum(tmp[2:3])
+totalproductcolums = prod(tmp[,2], tmp[,4])
+dimensions <- dim(tmp)
+cat("The dimension of the matrix is\n ", dimensions)
+getsecondrow <- tmp[2,]
+cat("The element that less than 0.2:", getsecondrow[getsecondrow < 0.2])
+
+
+
+
+
+##Problem 3:
+
+library(ISwR)
+data(thuesen)
+thue3 <- subset(thuesen,blood.glucose > 10 ,short.velocity > 1.5)
+
+##Problem 4:
+randuni <- runif(15,min = 1 ,max = 80)
+
+##Problem 5:
+dice <- sample(c('x','y','z'), size = 20, replace = TRUE, prob = c(0.2,0.3,0.5))
+vector <- c('x','y','z')
+probability  <- c (0.2,0.3,0.5)
+##Using uniform distributon 
+x = runif(20)
+rv = c()
+for(i in x)
+{
+  if(i < 0.2)
+  {
+    rv = c(rv,vector[1])
+  }
+  if(i >= 0.2 && i < 0.5)
+  {
+    rv = c(rv, vector[2])
+  }
+  if(i >=  0.5)
+  {
+    rv = c(rv,vector[3])
+  }
+}

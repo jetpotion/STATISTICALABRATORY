@@ -1,0 +1,41 @@
+##William Zhang Homework 2 ID:110768508
+
+##Problem 1
+##P returns the functions of the CDF 
+norm <- pnorm(16,15,3)
+norm 
+chiq <- pchisq(8,df = 10)
+chiq
+
+##d  returns the discrete function at the value of sucess.
+bin <-dbinom( 5,10,prob = 0.4)
+bin
+poison = dpois(5,lambda = 3)
+poison
+
+
+
+
+##problem 2
+caraccident <- matrix(c(25,121,18,92,13,130,6,87),nrow = 4,byrow = T)
+colnames(caraccident) <- c ("Yes", "No")
+rownames(caraccident) <- c("18-20","21-23","24-25",">25")
+names(dimnames(caraccident)) <- c("Age","Accidents")
+caraccident
+##Problem  3
+a <- seq(1,100,1)
+
+plot(a,rexp(a,2),type = 'l',main = "Exponential distribution with rate 2")
+##Problem 4
+h <- rnorm(50)
+logdata =  log(abs(h))
+par(mfrow = c(1,2))
+boxplot(h,main = "Normal data",xlab = "The random variable")
+boxplot(logdata,main = "Lognormal Data",xlab = "The logarithm variable")
+
+##Problem 5
+library(ISwR)
+data("react")
+hist(react)
+library(MASS)
+truehist(react,main = "True Hist")

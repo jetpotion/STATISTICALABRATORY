@@ -1,0 +1,65 @@
+#William Zhang 110768508 HOMEWORK 5
+#Problem 1
+
+logret <- read.table("d_logret_6stocks.txt", header=T)
+linearmodel <- lm(logret$Pfizer ~ logret$Exxon)
+linearmodel$coefficients
+
+summary(linearmodel)
+anova(linearmodel)
+#The p value of the anova  is 0.0043 which would be less than 0.05. We can reject null.
+#We have evidence to believe the regression effects are significant
+datafactor <- c(logret$Pfizer,logret$Exxon,logret$Citigroup)
+tags <- c(rep(1,64),rep(2,64),rep(3,64))
+tags <- factor(label)
+anothermodel <- lm(datafactor ~ tags)
+anova(anothermodel)
+
+#The p value of the anova is 0.2407 way too large greater than 0.05.
+#Accept null hypothesis 
+#The means are equal
+
+
+#Calculate porportion 
+total  = sum(logret$Citigroup)
+length  = length(logret$Citigroup)
+prop.test(total,length,0.5)
+
+#P value is extremely small.
+#Reject null hypothesis
+#We have evidence to think the probability is equal to 0.5 
+
+#Problem 2
+library(ISwR)
+ data("juul")
+ tanner <- factor(juul$tanner, labels = c('one','two','three', 'four','five'))
+ anova(lm(juul$igf1 ~ tanner))
+#P value is way to small. We can reject the null hypothesis.
+ #They will not have equal mean.They also have significant difference in  mean
+ 
+tanner1<- subset(juul, juul$tanner==1)
+tanner2<- subset(juul, juul$tanner==2)
+tanner3 <- subset(juul,juul$ tanner==3)
+tanner4 <- subset(juul,juul$ tanner==4)
+tanner5 <- subset(juul,juul$ tanner==5)
+mean(tanner1$igf1 ,na.rm = T)
+mean(tanner2$igf1 ,na.rm = T)
+mean(tanner3$igf1,na.rm = T)
+mean(tanner4$igf1,na.rm = T)
+mean(tanner5$igf1,na.rm = T)
+
+#Lastly do the pairwise test
+pairwise.t.test(juul$igf1,tanner,p.adj = "bonf")
+#lVL 4 and 3  as well  lvl 5 and 3 are greater than 0.05
+##Other other lvl comparisons are less than 0.05
+#So it appears any lvl compared other  than (lvl 5 && lvl 3) as well as (lvl 4 and lvl 3) 
+# are going to reject null hypothesis and conclude that they different means 
+
+
+#Problem 3
+library(MASS)
+survey  = data("survey")
+chisq.test(survey$Sex,survey$Exer)
+#The p value is just barely above 0.05. 
+#We will have to accept  the null hypothesis 
+#We will then say they are  independent of each other

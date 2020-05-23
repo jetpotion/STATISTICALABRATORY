@@ -1,0 +1,62 @@
+William Zhang Homework # 4
+
+#Question 1
+x  <- c(2.4,1.6,2.0,2.6,1.4,1.6,2.0,2.2)
+y <-  c(225,184,220,240,180,184,186,215)
+#Part 1
+correlation <- cor(x,y)
+#0.912905284....(data is highly correlated)
+#Part 2
+fit = lm(y~x)
+fit
+#The equation is 
+#y = 50.73x+ 104.06
+
+#Part 3
+summary(fit)$r.squared 
+#Coefficient of determination is: 0.8333961
+
+
+#Part 4
+summary(fit)
+#Both the p values are less than  0.01 
+#we have evidence to show there is a significant linear relationship
+
+
+#Part 5
+#Compute this equation
+y = 50.73 * 1.8  + 104.06
+cat("The expected value of 1800 dollars in advertisement is", y)
+#Question  2
+#Part A
+data  <- read.table("d_logret_6stocks.txt",header = T)
+model <- lm(data$Intel ~ data$Citigroup)
+model$coefficient
+#Esminated coefficient is  
+#Intercept : -0.00715923
+#data$Citigroup: 1.254286953
+
+#Part  B
+#Without intercept
+model2 <- lm(data$Intel ~ data$Citigroup - 1)
+model2$coefficients
+#data$Citigroup:1.247231
+
+#Testing correlation 
+correlationstocks  = cor(data$Intel,data$Citigroup)
+correlationtest = cor.test(data$Intel,data$Citigroup)
+correlationtest
+#P value is far too small we have to reject null hypothesis.
+##We have evidence that the correaltion is 0.5740286. They are somewhat correlated
+
+#Problem 3
+library(ISwR)
+ data("rmr")
+ attach(rmr)
+ plot(body.weight,metabolic.rate, main="Metabolic Rate vs Body Weight")
+ abline(lm(metabolic.rate~body.weight))
+linearmodel<-lm(metabolic.rate~body.weight)
+#Use the predict function from a linear model
+ predict(linearmodel,newdata=data.frame(body.weight=80))
+ 
+ #According to the predict function the metabolic rate is 1375.989
